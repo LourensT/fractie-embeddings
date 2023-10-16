@@ -6,6 +6,8 @@ import json
 from pprint import pprint
 import datetime
 
+from requests.exceptions import ConnectionError
+
 
 # %%
 def get_stemmingen_per_fractie(fractie, max_items = 100):
@@ -50,10 +52,18 @@ def dump_moties():
 
     # scrape backwards in time to get all decisions
     stemmingen = get_stemmingen_per_fractie(vvd, max_items = 10000)
-    for stemming in stemmingen:
-        besluit = stemming.besluit
-        res = get_decisions_per_fractie_from_besluit(besluit)
-        fp = f"./data/{res['datum']}_{res['onderwerp']}.json"
+    print(f"fetching {len(stemmingen)} decisions")
+    for i, stemming in enumerate(stemmingen):
+        if i % 25 == 0:
+            print(f"fetching decision {i} of {len(stemmingen)}")
+        try:
+            besluit = stemming.besluit
+            res = get_decisions_per_fractie_from_besluit(besluit)
+        except ConnectionError:
+            print("ConnectionError, skipping")
+            continue
+
+        fp = f"./data/{res['datum'][:10]}_{res['onderwerp']}.json"
         with open(fp, "w") as f:
             json.dump(res, f)
     
