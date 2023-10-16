@@ -32,24 +32,28 @@ def get_decisions_per_fractie_from_besluit(besluit):
     # pprint(response)
     return response
 
-def dump_moties(MAX=1000):
+def dump_moties():
     # get any active fractie
     all_fracties = api.get_fracties(max_items=100)
     fracties_met_zetels = []
     for fractie in all_fracties:
         if not fractie.zetels_aantal is None and fractie.zetels_aantal  > 0:
             fracties_met_zetels.append(fractie)
-    vvd = fracties_met_zetels[-2]
+
+    # select an active fractie, VVD is biggest and coalition, so most likely to have decisions
+    for fractie in fracties_met_zetels:
+        if fractie.naam == "Volkspartij voor Vrijheid en Democratie":
+            vvd = fractie
+            break
+
+    print(f"using as index the party {vvd.naam}")
 
     # scrape backwards in time to get all decisions
-    stemmingen = get_stemmingen_per_fractie(vvd)
+    stemmingen = get_stemmingen_per_fractie(vvd, max_items = 10000)
     for stemming in stemmingen:
         besluit = stemming.besluit
         res = get_decisions_per_fractie_from_besluit(besluit)
-        if len(res['onderwerp']) > 15:
-            fp = f"./data/{res['datum']}_{res['onderwerp'][15:]}.json"
-        else:
-            fp = f"./data/{res['datum']}_{res['onderwerp']}.json"
+        fp = f"./data/{res['datum']}_{res['onderwerp']}.json"
         with open(fp, "w") as f:
             json.dump(res, f)
     
