@@ -3,7 +3,6 @@
 Moties en stemgedrag van fracties van Tweede Kamer. Data via `tkapi`, de python interface van de [Tweede Kamer API](https://www.tweedekamer.nl/kamerstukken/open_data).
 
 
-
 ### installation (linux, python 3.8)
 
 create a virtual environment and install the requirements
@@ -25,4 +24,26 @@ Politiek kompas op basis van 1316 moties van januari 2022 tm oktober 2023 (Rutte
 **Valkuilen**
 * Bij een dimensie-reductie van 1316 -> 2 gaat er veel nuance verloren. Specifieke onderwerpen die niet vaak aan bod komen hebben weinig invloed op de positie van een fractie in dit kompas. 
 * Ik heb eerlijk gezegd geen idee of ik alle moties heb, of dat ik juist stemmingen heb meegenomen die geen moties zijn.
-* Niet alle fracties bestaan evenlang. Bijv. ephraim 
+* Niet alle fracties bestaan evenlang. Bijv. ephraim is in augustus pas afgesplits bij Groep Van Haga.
+
+## Fusies suggereren
+Op dit moment is de tweede kamer flink gefragmenteerd. In 2010 waren er 10 fracties, en nu 21.
+Met een simpele *KMeans* clustering kunnen we kijken welke fusies de minste compromisssen qua stemgedrag vereisen.
+Hiervoor passen we de volgende restricties toe.
+* Partijen/leden die niet herverkiesbaar zijn, houden we buiten beschouwing.
+* Partijen in de coalitie, die als gevolg van coalitieakkoord vaak samen stemmen, houden we buiten beschouwing.
+* Elke partij wordt gewogen met het aantal zetels dat zij heeft. 
+
+### Fusies op volgorde van 'haalbaarheid' 
+1. PvdA - GroenLinks
+2. PvdA - GroenLinks - Volt
+3. BIJ1 - Partij van de Dieren
+4. HAGA - JA21
+
+#### Conclusie: 'no free lunch' 
+Als maat voor succesvolle fusie kijken we naar het verschil tussen het stemgedrag van voorgestelde fusies en de daadwerkelijke fracties. Zoals in de onderstaande afbeelding te zien is, gaat deze vrijwel linear naar beneden. Dat is geen goed teken voor fusies. Je hoopt eigenlijk op een knik in deze curve, zodat je een fusie kan doen wat de afstand erg verminderd (het zogenaamde hockey-stick punt). Bij de fusie van PvdA-GL (ze stemmen in 97% van de gevallen samen en staan in November 2023 samen op de lijst), zorgt voor een klein knikje, maar niks overduidelijk. 
+![score voor fusie](./plots/fusie%20suggesties.png)
+
+#### Valkuilen
+* alle moties worden gelijk gewogen. Echter zijn sommige moties een stuk belangrijker voor bepaalde partijen. 
+* stemgedrag wordt beinvloed door de coalitie. Mogelijk zou een oppositie partij willen fuseren met een coalitiepartij, maar dit is nu niet mogelijk.
