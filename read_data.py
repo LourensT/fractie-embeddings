@@ -9,7 +9,7 @@ def read_dataset(fp="./data/"):
 
     # all motions
     moties = os.listdir(fp)
-    with open(f"{fp}{moties[0]}", "r") as f:
+    with open(f"{fp}2023-09-26_Aangehouden motie ingediend bij het tweeminutendebat Vergunningverlening, toezicht en handhaving (VTH-stelsel).json", "r") as f:
         data = json.load(f)
 
     # all parties
@@ -20,7 +20,10 @@ def read_dataset(fp="./data/"):
     for i, motie in enumerate(moties):
         with open(f"./data/{motie}", "r") as f:
             data = json.load(f)
-            for party, vote in data['stemgedrag'].items():
-                X[party_index[party], i] = VOTE_TO_NUMERIC[vote]
+            if len(data['stemgedrag']) > 1:
+                for party, vote in data['stemgedrag'].items():
+                    X[party_index[party], i] = VOTE_TO_NUMERIC[vote]
 
     return X, party_index
+
+# %%

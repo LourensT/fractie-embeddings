@@ -50,7 +50,7 @@ def get_moties():
     filter = ZaakMotie.create_filter()
     filter.filter_soort('Motie')
     filter.filter_date_range(START, END)
-    zaken = api.get_zaken(filter=filter, max_items=1000)
+    zaken = api.get_zaken(filter=filter, max_items=100000)
 
     print("Starting...")
     i = 0
@@ -74,8 +74,8 @@ def get_moties():
 # %%
 if __name__ == "__main__":
     api = tkapi.TKApi()
-    OUTPUT_FP = "./data2/"
-    START = datetime.datetime(2022, 2, 11)
-    END = datetime.datetime(2022, 9, 21)
-
+    OUTPUT_FP = "./data/"
+    START = datetime.datetime(2023, 5, 31)
+    END = datetime.datetime(2023, 10, 15)
+    
     get_moties()
