@@ -41,7 +41,7 @@ Hiervoor passen we de volgende restricties toe.
 4. HAGA - JA21
 
 #### Conclusie: 'no free lunch' 
-Als maat voor succesvolle fusie kijken we naar het verschil tussen het stemgedrag van voorgestelde fusies en de daadwerkelijke fracties. Zoals in de onderstaande afbeelding te zien is, gaat deze vrijwel linear naar beneden. Dat is geen goed teken voor fusies. Je hoopt eigenlijk op een knik in deze curve, zodat je een fusie kan doen wat de afstand erg verminderd (het zogenaamde hockey-stick punt). Bij de fusie van PvdA-GL (ze stemmen in 97% van de gevallen samen en staan in November 2023 samen op de lijst), zorgt voor een klein knikje, maar niks overduidelijk. 
+Als maat voor succesvolle fusie kijken we naar het verschil tussen het stemgedrag van voorgestelde fusies en de daadwerkelijke fracties. Zoals in de onderstaande afbeelding te zien is, gaat deze vrijwel linear naar beneden. Dat is geen goed teken voor fusies. Je hoopt eigenlijk op een knik in deze curve, zodat je een fusie kan doen wat de afstand erg vermindert (het zogenaamde hockey-stick punt). Bij de fusie van PvdA-GL (ze stemmen in 97% van de gevallen samen en staan in November 2023 samen op de lijst), zorgt voor een klein knikje, maar niks overduidelijk. 
 ![score voor fusie](./plots/fusie%20suggesties.png)
 
 #### Valkuilen
